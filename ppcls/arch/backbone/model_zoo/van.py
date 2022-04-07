@@ -196,12 +196,12 @@ class OverlapPatchEmbed(nn.Layer):
 
 
 class VAN(nn.Layer):
-    def __init__(self, img_size=224, in_chans=3, num_classes=1000, embed_dims=[64, 128, 256, 512],
+    def __init__(self, img_size=224, in_chans=3, class_num=1000, embed_dims=[64, 128, 256, 512],
                 mlp_ratios=[4, 4, 4, 4], drop_rate=0., drop_path_rate=0., norm_layer=nn.LayerNorm,
                  depths=[3, 4, 6, 3], num_stages=4, flag=False):
         super().__init__()
         if flag == False:
-            self.num_classes = num_classes
+            self.num_classes = class_num
         self.depths = depths
         self.num_stages = num_stages
 
@@ -226,7 +226,7 @@ class VAN(nn.Layer):
             setattr(self, f"norm{i + 1}", norm)
 
         # classification head
-        self.head = nn.Linear(embed_dims[3], num_classes) if num_classes > 0 else nn.Identity()
+        self.head = nn.Linear(embed_dims[3], class_num) if class_num > 0 else nn.Identity()
 
         self.apply(self._init_weights)
 

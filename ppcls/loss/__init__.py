@@ -26,6 +26,7 @@ from .multilabelloss import MultiLabelLoss
 
 from .deephashloss import DSHSDLoss, LCDSHLoss
 
+from .softtargetcrossentropyloss import SoftTargetCrossEntropyLoss
 
 class CombinedLoss(nn.Layer):
     def __init__(self, config_list):
