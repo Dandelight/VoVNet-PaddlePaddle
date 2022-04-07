@@ -79,6 +79,13 @@ DataLoader:
             img_size: 224
         - AugMix:
             prob: 0.5
+        # - OpSampler:
+        #     MixupOperator:
+        #        alpha: 0.8
+        #        prob: 0.5
+        #     CutmixOperator:
+        #       alpha: 1.0
+        #       prob: 0.5
         - NormalizeImage:
             scale: 1.0/255.0
             mean: [0.485, 0.456, 0.406]
@@ -86,8 +93,8 @@ DataLoader:
             order: ''
 
     sampler:
+      name: BatchSampler
       # name: DistributedBatchSampler
-      name: RandomSampler
       batch_size: 64
       drop_last: False
       shuffle: True
@@ -114,7 +121,8 @@ DataLoader:
             std: [0.5, 0.5, 0.5]
             order: ''
     sampler:
-      name: DistributedBatchSampler
+      # name: DistributedBatchSampler
+      name: BatchSampler
       batch_size: 64
       drop_last: False
       shuffle: False

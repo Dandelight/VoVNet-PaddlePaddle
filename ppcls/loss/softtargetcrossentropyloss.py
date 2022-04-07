@@ -28,5 +28,5 @@ class SoftTargetCrossEntropyLoss(nn.Layer):
         super(SoftTargetCrossEntropyLoss, self).__init__()
 
     def forward(self, x, target):
-        loss = paddle.sum(-target * F.log_softmax(x, dim=-1), dim=-1)
-        return loss.mean()
+        loss = paddle.sum((-target * F.log_softmax(x, axis=-1)).cast("float32"), axis=-1)
+        return {"STCELoss": loss.mean()}
