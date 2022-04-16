@@ -1,7 +1,7 @@
 # global configs
 Global:
-  checkpoints: /nvme/grm/paddle/PaddleClas/output_vov/vovnet39/epoch_22
-  pretrained_model: null
+  checkpoints: /home/aistudio/work/van-paddle/output_vov/epoc
+  pretrained_model: /home/aistudio/work/van-paddle/output_vov/epoch_61
   output_dir: ./output_vov/
   device: gpu
   save_interval: 1
@@ -77,8 +77,8 @@ DataLoader:
   Eval:
     dataset:
       name: ImageNetDataset
-      image_root: ./dataset/ILSVRC2012/val/class/
-      cls_label_path: ./dataset/val_list_zero_indexed.txt
+      image_root: /home/aistudio/data/data68594/
+      cls_label_path: /home/aistudio/work/val_list_zero_indexed.txt
       transform_ops:
         - DecodeImage:
             to_rgb: True
@@ -94,11 +94,11 @@ DataLoader:
             order: ''
     sampler:
       name: DistributedBatchSampler
-      batch_size: 32
+      batch_size: 128
       drop_last: False
       shuffle: False
     loader:
-      num_workers: 4
+      num_workers: 8
       use_shared_memory: True
 
 Infer:

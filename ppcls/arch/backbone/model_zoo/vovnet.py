@@ -11,6 +11,9 @@ kaiming_normal_ = KaimingNormal()
 from collections import OrderedDict
 
 
+from ppcls.utils.save_load import load_dygraph_pretrain, load_dygraph_pretrain_from_url
+
+
 __all__ = ['VoVNet', 'vovnet27_slim', 'vovnet39', 'vovnet57']
 
 
@@ -175,6 +178,19 @@ class VoVNet(nn.Layer):
         return x
 
 
+
+def _load_pretrained(pretrained, model, model_url="", use_ssld=False):
+    if pretrained is False:
+        pass
+    elif pretrained is True:
+        load_dygraph_pretrain_from_url(model, model_url, use_ssld=use_ssld)
+    elif isinstance(pretrained, str):
+        load_dygraph_pretrain(model, pretrained)
+    else:
+        raise RuntimeError(
+            "pretrained type is not available. Please use `string` or `boolean` type."
+        )
+
 def _vovnet(arch,
             config_stage_ch,
             config_concat_ch,
@@ -187,9 +203,7 @@ def _vovnet(arch,
                    block_per_stage, layer_per_block,
                    **kwargs)
     if pretrained:
-        state_dict = load_state_dict_from_url(model_urls[arch],
-                                              progress=progress)
-        model.load_state_dict(state_dict)
+        _load_pretrained(pretrained, model)
     return model
 
 
