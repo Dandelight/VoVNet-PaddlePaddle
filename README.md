@@ -28,28 +28,7 @@
 
 ## 2. 数据集和复现精度
 
-数据集为`ImageNet-1K`，训练集包含1281167张图像，验证集包含50000张图像。数据的组织方式如下。
-
-```
-PaddleClas/dataset/ILSVRC2012/
-|_ train/
-|  |_ n01440764
-|  |  |_ n01440764_10026.JPEG
-|  |  |_ ...
-|  |_ ...
-|  |
-|  |_ n15075141
-|     |_ ...
-|     |_ n15075141_9993.JPEG
-|_ val/
-|  |_ ILSVRC2012_val_00000001.JPEG
-|  |_ ...
-|  |_ ILSVRC2012_val_00050000.JPEG
-|_ train_list.txt
-|_ val_list.txt
-```
-
-您可以从[ImageNet 官网](https://image-net.org/)申请下载数据。
+数据集为`ImageNet-1K`，训练集包含1281167张图像，验证集包含50000张图像。您可以从[ImageNet 官网](https://image-net.org/)申请下载数据。
 
 | 模型      | top1 acc (参考精度) | top1 acc (复现精度) | 权重 \| 训练日志 |
 |:---------:|:------:|:----------:|:----------:|
@@ -97,6 +76,34 @@ pip install -r requirements.txt
 ### 3.2 准备数据
 
 如果您已经拥有`ImageNet-1K`数据集，那么该步骤可以跳过，如果您没有，则可以从[ImageNet官网](https://image-net.org/download.php)申请下载。
+
+下载后请将数据集挂载到`dataset/ILSVRC2012`文件夹下。
+
+```shell
+# 在本项目根目录下执行
+ln –s ${ImageNet根目录} ./dataset/ILSVRC2012
+```
+
+挂载后数据的组织形式如下。
+
+```
+PaddleClas/dataset/ILSVRC2012/
+|_ train/
+|  |_ n01440764
+|  |  |_ n01440764_10026.JPEG
+|  |  |_ ...
+|  |_ ...
+|  |
+|  |_ n15075141
+|     |_ ...
+|     |_ n15075141_9993.JPEG
+|_ val/
+|  |_ ILSVRC2012_val_00000001.JPEG
+|  |_ ...
+|  |_ ILSVRC2012_val_00050000.JPEG
+|_ train_list.txt
+|_ val_list.txt
+```
 
 如果只是希望快速体验模型训练功能，可以参考：[飞桨训推一体认证（TIPC）开发文档](https://github.com/PaddlePaddle/models/blob/tipc/docs/tipc_test/README.md)
 
