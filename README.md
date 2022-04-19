@@ -30,14 +30,13 @@
 
 数据集为`ImageNet-1K`，训练集包含1281167张图像，验证集包含50000张图像。您可以从[ImageNet 官网](https://image-net.org/)申请下载数据。
 
-| 模型      | top1 acc (参考精度) | top1 acc (复现精度) | 权重 \| 训练日志 |
-|:---------:|:------:|:----------:|:----------:|
-| VoVNet39 | 0.76.77   |  ？？？  | best_model.pdparams \| train.log |
+| 模型      | top1 acc (参考精度) | top1 acc (模型转换精度) | top1 acc (实际训练) | 权重 \| 训练日志 |
+|:---------:|:------:|:----------:|:----------:|:----------:|
+| VoVNet39 | 0.7677   |  0.76122  | 0.75904 | best_model.pdparams \| train.log |
 
-权重及训练日志下载地址：[？？？]()
+权重及训练日志下载地址：[百度网盘](链接：https://pan.baidu.com/s/1W7H_oBMqlxE_VjtCtYdxTA?pwd=xrub)
 
 ## 3. 准备数据与环境
-
 
 ### 3.1 准备环境
 
@@ -160,9 +159,9 @@ python tools/infer.py \
 
 最终输出结果为
 ```
-??
+[{'class_ids': [178, 246, 210, 209, 171], 'scores': [0.71461, 0.00499, 0.00289, 0.00234, 0.00232], 'file_name': './deploy/images/ILSVRC2012_val_00020010.jpeg', 'label_names': ['Weimaraner', 'Great Dane', 'German short-haired pointer', 'Chesapeake Bay retriever', 'Italian greyhound']}]
 ```
-表示预测的类别为`Weimaraner（魏玛猎狗）`，ID是`178`，置信度为`0.8353`。
+表示预测的类别为`Weimaraner（魏玛猎狗）`，ID是`178`，置信度为`0.71461`。
 
 ## 5. 模型推理部署
 
@@ -192,6 +191,7 @@ TIPC: [test_tipc/README.md](./test_tipc/README.md)
 
 首先安装auto_log，需要进行安装，安装方式如下：
 auto_log的详细介绍参考<https://github.com/LDOUBLEV/AutoLog>。
+
 ```shell
 git clone https://github.com/LDOUBLEV/AutoLog
 cd AutoLog/
@@ -199,20 +199,8 @@ pip3 install -r requirements.txt
 python3 setup.py bdist_wheel
 pip3 install ./dist/auto_log-1.2.0-py3-none-any.whl
 ```
-进行TIPC：
-```bash
-bash test_tipc/prepare.sh test_tipc/config/VoVNet/VoVNet39.txt 'lite_train_lite_infer'
-bash test_tipc/test_train_inference_python.sh test_tipc/config/VoVNet/VoVNet_39.txt 'lite_train_lite_infer'
-```
-TIPC结果：
 
-如果运行成功，在终端中会显示下面的内容，具体的日志也会输出到`test_tipc/output/`文件夹中的文件中。
-
-```
-Run successfully with command - python3.7 -m paddle.distributed.launch --gpus=0,1 train.py --lr=0.001 --data-path=./lite_data --device=cpu --output-dir=./test_tipc/output/norm_train_gpus_0,1_autocast_null --epochs=1     --batch-size=1    !
- ...
-Run successfully with command - python3.7 deploy/py_inference/infer.py --use-gpu=False --use-mkldnn=False --cpu-threads=6 --model-dir=./test_tipc/output/norm_train_gpus_0_autocast_null/ --batch-size=1     --benchmark=False     > ./test_tipc/output/python_infer_cpu_usemkldnn_False_threads_6_precision_null_batchsize_1.log 2>&1 !
-```
+进行TIPC：进行中
 
 * 更多详细内容，请参考：[TIPC测试文档](./test_tipc/README.md)。
 
