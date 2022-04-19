@@ -188,10 +188,10 @@ Serving部署教程可参考：[链接](./deploy/paddleserving/readme.md)。
 
 **详细日志在test_tipc/output**
 
-TIPC: [TIPC: test_tipc/README.md](./test_tipc/README.md)
+TIPC: [test_tipc/README.md](./test_tipc/README.md)
 
 首先安装auto_log，需要进行安装，安装方式如下：
-auto_log的详细介绍参考https://github.com/LDOUBLEV/AutoLog。
+auto_log的详细介绍参考<https://github.com/LDOUBLEV/AutoLog>。
 ```shell
 git clone https://github.com/LDOUBLEV/AutoLog
 cd AutoLog/
@@ -201,8 +201,8 @@ pip3 install ./dist/auto_log-1.2.0-py3-none-any.whl
 ```
 进行TIPC：
 ```bash
-bash test_tipc/prepare.sh test_tipc/config/VAN/VAN_tiny.txt 'lite_train_lite_infer'
-bash test_tipc/test_train_inference_python.sh test_tipc/config/VAN/VAN_tiny.txt 'lite_train_lite_infer'
+bash test_tipc/prepare.sh test_tipc/config/VoVNet/VoVNet39.txt 'lite_train_lite_infer'
+bash test_tipc/test_train_inference_python.sh test_tipc/config/VoVNet/VoVNet_39.txt 'lite_train_lite_infer'
 ```
 TIPC结果：
 
